@@ -8,10 +8,39 @@ module.exports = {
     },
     module:{
         rules:[
+          {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: [
+                  'file-loader'
+              ]
+          },
             {
                 test:/\.(sc|c|sa)ss$/,
-                use:['style-loader','css-loader','sass-loader']
-            },
+                use:['style-loader',
+                {
+                  loader:'css-loader',
+                  options:{
+                    sourceMap:true
+                  }  
+                },
+                {
+                  loader:'postcss-loader',
+                  options:{
+                    ident:'postcss',
+                    sourceMap:true,
+                    plugins:loader => [
+                      require('autoprefixer')({browsers: ['> 0.15% in CN']})
+                    ]
+                  }
+                },
+                {
+                  loader:'sass-loader',
+                  options:{
+                    sourceMap:true
+                  }
+                }
+              ]
+            }, 
         ]
     }
 }

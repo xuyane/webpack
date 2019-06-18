@@ -10,5 +10,5 @@ function createDomElement(){
     return dom;
 }
 let divDom = createDomElement();
-
+   
 document.body.appendChild(divDom);
